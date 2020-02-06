@@ -72,25 +72,32 @@ app.post('/api/shorturl/new', (req, res) => {
 			} else {
 				// first checking if input_url already exist in db, then no need to generate new, return
 				// the found short_url
-				Url.findOne({ original_url: input_url }, (err, foundUrl) => {
-					if (err) {
-						console.log(err)
-					} else if (foundUrl) {
-						res.json(foundUrl)
-					} else {
-						let deci = parseInt(COUNTER.toString().padStart(7, 0))
-						COUNTER += 1
-						let short_url = base62_encode(deci)
-						console.log(short_url, deci)
-						Url.create({ original_url: input_url, short_url }, (err, createdUrl) => {
-							if (err) {
-								console.log(err)
-							} else {
-								res.json(createdUrl)
-							}
-						})
+				Url.findOne(
+					{ original_url: input_url },
+					{ original_url: 1, short_url: 1, _id: 0 },
+					(err, foundUrl) => {
+						if (err) {
+							console.log(err)
+						} else if (foundUrl) {
+							res.json(foundUrl)
+						} else {
+							let deci = parseInt(COUNTER.toString().padStart(7, 0))
+							COUNTER += 1
+							let short_url = base62_encode(deci)
+							console.log(short_url, deci)
+							Url.create(
+								{ original_url: input_url, short_url },
+								(err, createdUrl) => {
+									if (err) {
+										console.log(err)
+									} else {
+										res.json(createdUrl)
+									}
+								}
+							)
+						}
 					}
-				})
+				)
 			}
 		})
 	} else {
