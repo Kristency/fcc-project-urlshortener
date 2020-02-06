@@ -9,9 +9,11 @@
 	"dependencies": {
 		"body-parser": "^1.15.2",
 		"cors": "^2.8.1",
+		"dotenv": "^8.2.0",
 		"express": "^5.0.0-alpha.2",
 		"mongodb": "^3.5.2",
-		"mongoose": "^5.8.11"
+		"mongoose": "^5.8.11",
+		"nodemon": "^2.0.2"
 	},
 	"engines": {
 		"node": "4.4.5"
