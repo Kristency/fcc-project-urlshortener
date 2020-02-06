@@ -18,12 +18,12 @@ const port = process.env.PORT || 3000
 
 /** this project needs a db !! **/
 
-// mongoose.connect(process.env.DATABASEURL || 'mongodb://localhost:27017/url-shortener', {
-// 	useNewUrlParser: true
-// })
-mongoose.connect('mongodb://localhost:27017/url-shortener', {
+mongoose.connect(process.env.DATABASEURL || 'mongodb://localhost:27017/url-shortener', {
 	useNewUrlParser: true
 })
+// mongoose.connect('mongodb://localhost:27017/url-shortener', {
+// 	useNewUrlParser: true
+// })
 
 app.use(cors())
 
